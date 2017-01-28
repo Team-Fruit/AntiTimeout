@@ -11,7 +11,7 @@ public class ThreadTimeoutCheck extends Thread {
 			@Override
 			public void uncaughtException(final Thread t, final Throwable e) {
 				if (e instanceof MinecraftTimeoutError)
-					CrashUtil.instance().crash("Server timeout", e);
+					CrashUtil.crash("Server timeout", e);
 			}
 		});
 	}
