@@ -19,11 +19,12 @@ public class AntiTimeoutHandler {
 
 	@SubscribeEvent
 	public void onServerTick(final ServerTickEvent event) {
-		if (this.start)
-			if (this.tickCount>=20) {
-				this.lastTime = System.currentTimeMillis();
-				this.tickCount = 0;
-			}
+		if (!this.start)
+			return;
+		if (this.tickCount>=20) {
+			this.lastTime = System.currentTimeMillis();
+			this.tickCount = 0;
+		}
 		this.tickCount++;
 	}
 

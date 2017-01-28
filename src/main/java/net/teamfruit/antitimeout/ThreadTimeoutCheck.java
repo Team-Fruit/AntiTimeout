@@ -20,6 +20,7 @@ public class ThreadTimeoutCheck extends Thread {
 
 	@Override
 	public void run() {
+		AntiTimeoutHandler.instance().setStart(true);
 		while (true) {
 			final long timeout = System.currentTimeMillis()-AntiTimeoutHandler.instance().getLastTime();
 			if (timeout>TIMEOUT_MILLISECONDS)
@@ -30,11 +31,5 @@ public class ThreadTimeoutCheck extends Thread {
 				Reference.logger.error(e);
 			}
 		}
-	}
-
-	@Override
-	public synchronized void start() {
-		super.start();
-		AntiTimeoutHandler.instance().setStart(true);
 	}
 }
