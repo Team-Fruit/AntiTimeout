@@ -13,7 +13,7 @@ public class AntiTimeoutHandler {
 		return INSTANCE;
 	}
 
-	private long lastTime;
+	private long lastTime = System.currentTimeMillis();
 	private int tickCount;
 
 	@SubscribeEvent
