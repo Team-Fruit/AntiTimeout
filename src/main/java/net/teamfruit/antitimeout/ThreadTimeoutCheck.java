@@ -10,8 +10,8 @@ public class ThreadTimeoutCheck extends Thread {
 		setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			@Override
 			public void uncaughtException(final Thread t, final Throwable e) {
-				if (e instanceof MinecraftTimeoutException)
-					throw (MinecraftTimeoutException) e;
+				if (e instanceof MinecraftTimeoutError)
+					CrashUtil.instance().crash("Server timeout", e);
 			}
 		});
 	}
@@ -22,13 +22,19 @@ public class ThreadTimeoutCheck extends Thread {
 	public void run() {
 		while (true) {
 			final long timeout = System.currentTimeMillis()-AntiTimeoutHandler.instance().getLastTime();
-			if (timeout>TIMEOUT_MILLISECONDS)
-				throw new MinecraftTimeoutException("The main thread has stopped working for at least "+timeout+" milliseconds!");
+			if (timeouts>TIMEOUT_MILLISECONDS)
+				throw new MinecraftTimeoutError("The main thread has stopped working for at least "+timeout+" milliseconds!");
 			try {
 				TimeUnit.SECONDS.sleep(15);
 			} catch (final InterruptedException e) {
 				Reference.logger.error(e);
 			}
 		}
+	}
+
+	@Override
+	public synchronized void start() {
+		super.start();
+		AntiTimeoutHandler.instance().setStart(true);
 	}
 }
