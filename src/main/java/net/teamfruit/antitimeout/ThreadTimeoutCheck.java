@@ -22,7 +22,7 @@ public class ThreadTimeoutCheck extends Thread {
 	public void run() {
 		while (true) {
 			final long timeout = System.currentTimeMillis()-AntiTimeoutHandler.instance().getLastTime();
-			if (timeouts>TIMEOUT_MILLISECONDS)
+			if (timeout>TIMEOUT_MILLISECONDS)
 				throw new MinecraftTimeoutError("The main thread has stopped working for at least "+timeout+" milliseconds!");
 			try {
 				TimeUnit.SECONDS.sleep(15);

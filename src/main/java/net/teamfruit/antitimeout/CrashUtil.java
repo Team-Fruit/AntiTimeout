@@ -11,17 +11,17 @@ import net.minecraft.util.ReportedException;
 public class CrashUtil {
 	private static final CrashUtil INSTANCE = new CrashUtil();
 
-	private File crashreportDirectory;
+	private final File crashreportDirectory;
 	//	private Field serverStopped;
 
 	private CrashUtil() {
-		try {
-			this.crashreportDirectory = FMLCommonHandler.instance().getMinecraftServerInstance().getFile("crash-reports");
-			//			this.serverStopped = MinecraftServer.class.getField(ObfuscationReflectionHelper.remapFieldNames("MinecraftServer", "field_71316_v")[0]);
-			//			this.serverStopped.setAccessible(true);
-		} catch (final Exception e) {
-			Reference.logger.error(e);
-		}
+		//		try {
+		this.crashreportDirectory = FMLCommonHandler.instance().getMinecraftServerInstance().getFile("crash-reports");
+		//			this.serverStopped = MinecraftServer.class.getField(ObfuscationReflectionHelper.remapFieldNames("MinecraftServer", "field_71316_v")[0]);
+		//			this.serverStopped.setAccessible(true);
+		//		} catch (final Exception e) {
+		//			Reference.logger.error(e);
+		//		}
 	}
 
 	public static CrashUtil instance() {
