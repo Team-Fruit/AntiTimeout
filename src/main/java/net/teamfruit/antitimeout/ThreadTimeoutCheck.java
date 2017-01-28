@@ -9,7 +9,7 @@ public class ThreadTimeoutCheck extends Thread {
 		setName("antitimeout-check");
 	}
 
-	private static final long TIMEOUT_MILLISECONDS = TimeUnit.MILLISECONDS.toMinutes(3);
+	private static final long TIMEOUT_MILLISECONDS = TimeUnit.MILLISECONDS.toMinutes(1);
 
 	@Override
 	public void run() {
@@ -18,7 +18,7 @@ public class ThreadTimeoutCheck extends Thread {
 			if (timeout>TIMEOUT_MILLISECONDS)
 				throw new MinecraftTimeoutError("The main thread has stopped working for at least"+timeout+"milliseconds!");
 			try {
-				TimeUnit.MINUTES.sleep(1);
+				TimeUnit.SECONDS.sleep(15);
 			} catch (final InterruptedException e) {
 				Reference.logger.error(e);
 			}
