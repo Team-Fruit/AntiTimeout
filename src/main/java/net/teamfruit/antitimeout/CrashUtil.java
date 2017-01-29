@@ -12,6 +12,9 @@ public class CrashUtil {
 	private static final File crashreportDirectory = FMLCommonHandler.instance().getMinecraftServerInstance().getFile("crash-reports");
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
 
+	private CrashUtil() {
+	}
+
 	public static void crash(final String description, final Throwable t) {
 		Reference.logger.error("Encountered an unexpected exception", t);
 		try {
