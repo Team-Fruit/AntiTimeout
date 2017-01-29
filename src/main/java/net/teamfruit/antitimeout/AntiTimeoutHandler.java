@@ -30,7 +30,8 @@ public class AntiTimeoutHandler {
 
 	public void setStart(final boolean b) {
 		this.start = b;
-		this.lastTime = System.currentTimeMillis();
+		if (b)
+			this.lastTime = System.currentTimeMillis();
 	}
 
 	public long getLastTime() {
