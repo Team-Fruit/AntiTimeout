@@ -32,7 +32,10 @@ public class CrashUtil {
 		} catch (final Exception e) {
 			Reference.logger.error(e);
 		}
+		exit();
+	}
 
+	public static void exit() {
 		try {
 			FMLCommonHandler.instance().getMinecraftServerInstance().stopServer();
 		} catch (final Throwable throwable) {
