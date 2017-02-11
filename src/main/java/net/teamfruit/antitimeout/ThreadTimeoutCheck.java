@@ -16,7 +16,7 @@ public class ThreadTimeoutCheck extends Thread {
 		AntiTimeoutHandler.instance().setStart(true);
 		while (true) {
 			final long timeout = System.currentTimeMillis()-AntiTimeoutHandler.instance().getLastTime();
-			if (timeout>ConfigurationHandler.timeoutMinutes) {
+			if (timeout>TimeUnit.MINUTES.toMillis(ConfigurationHandler.timeoutMinutes)) {
 				ThreadTimeoutCheck.timeout = true;
 				if (ConfigurationHandler.generateCrashReport)
 					CrashUtil.crash("Server timeout", new MinecraftTimeoutError("The server thread has stopped working for at least "+timeout+" milliseconds!"));
