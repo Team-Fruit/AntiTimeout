@@ -1,0 +1,18 @@
+{
+	"modListVersion": 2,
+	"modList": [
+		{
+			"modid": "antitimeout",
+			"name": "AntiTimeout",
+			"description": "Farewell to permanent timeout.",
+			"mcversion": "${mcversion}",
+			"version": "${version}",
+			"authorList": [
+				"sjcl"
+			],
+			"credits": "2017 TeamFruit",
+			"url": "https://github.com/Team-Fruit/AntiTimeout/releases",
+			"useDependencyInformation": false
+		}
+	]
+}

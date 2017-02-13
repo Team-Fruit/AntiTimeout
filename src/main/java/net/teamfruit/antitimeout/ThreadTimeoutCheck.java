@@ -6,15 +6,21 @@ public class ThreadTimeoutCheck extends Thread {
 
 	public static boolean timeout;
 
+	private boolean state = true;
+
 	public ThreadTimeoutCheck() {
 		setDaemon(true);
 		setName("antitimeout-check");
 	}
 
+	public void safeStop() {
+		this.state = false;
+	}
+
 	@Override
 	public void run() {
 		AntiTimeoutHandler.instance().setStart(true);
-		while (true) {
+		while (this.state) {
 			final long timeout = System.currentTimeMillis()-AntiTimeoutHandler.instance().getLastTime();
 			if (timeout>TimeUnit.MINUTES.toMillis(ConfigurationHandler.timeoutMinutes)) {
 				ThreadTimeoutCheck.timeout = true;
