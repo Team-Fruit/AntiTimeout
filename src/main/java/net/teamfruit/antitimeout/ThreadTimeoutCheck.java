@@ -6,7 +6,7 @@ public class ThreadTimeoutCheck extends Thread {
 
 	public static boolean timeout;
 
-	private boolean state = true;
+	private volatile boolean state = true;
 
 	public ThreadTimeoutCheck() {
 		setDaemon(true);
