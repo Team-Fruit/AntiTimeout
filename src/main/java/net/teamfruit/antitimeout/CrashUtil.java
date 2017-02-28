@@ -9,7 +9,7 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.util.ReportedException;
 
 public class CrashUtil {
-	private static final File crashreportDirectory = FMLCommonHandler.instance().getMinecraftServerInstance().getFile("crash-reports");
+	private static File crashreportDirectory = FMLCommonHandler.instance().getMinecraftServerInstance().getFile("crash-reports");
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
 
 	private CrashUtil() {
@@ -23,10 +23,9 @@ public class CrashUtil {
 				crashreport = FMLCommonHandler.instance().getMinecraftServerInstance().addServerInfoToCrashReport(((ReportedException) t).getCrashReport());
 			else
 				crashreport = FMLCommonHandler.instance().getMinecraftServerInstance().addServerInfoToCrashReport(new CrashReport(description, t));
-			File file1;
-			file1 = new File(crashreportDirectory, "crash-"+dateFormat.format(new Date())+"-server.txt");
-			if (crashreport.saveToFile(file1))
-				Reference.logger.error("This crash report has been saved to: "+file1.getAbsolutePath());
+			final File file = new File(crashreportDirectory, "crash-"+dateFormat.format(new Date())+"-server.txt");
+			if (crashreport.saveToFile(file))
+				Reference.logger.error("This crash report has been saved to: "+file.getAbsolutePath());
 			else
 				Reference.logger.error("We were unable to save this crash report to disk.");
 		} catch (final Exception e) {
