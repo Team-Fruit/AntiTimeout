@@ -1,7 +1,8 @@
 package net.teamfruit.antitimeout;
 
 public class MinecraftTimeoutError extends Error {
-	private static final long serialVersionUID = -8682842383044426861L;
+
+	private static final long serialVersionUID = 1525399522582905960L;
 
 	public MinecraftTimeoutError() {
 		super();
@@ -17,11 +18,5 @@ public class MinecraftTimeoutError extends Error {
 
 	public MinecraftTimeoutError(final Throwable cause) {
 		super(cause);
-	}
-
-	public MinecraftTimeoutError(final String message, final Throwable cause,
-			final boolean enableSuppression,
-			final boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

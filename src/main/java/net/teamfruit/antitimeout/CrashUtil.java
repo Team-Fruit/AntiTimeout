@@ -34,13 +34,15 @@ public class CrashUtil {
 		exit();
 	}
 
-	public static void exit() {
+	public static void save() {
 		try {
 			FMLCommonHandler.instance().getMinecraftServerInstance().stopServer();
 		} catch (final Throwable throwable) {
 			Reference.logger.error("Exception stopping the server", throwable);
-		} finally {
-			FMLCommonHandler.instance().exitJava(1, false);
 		}
+	}
+
+	public static void exit() {
+		FMLCommonHandler.instance().exitJava(1, false);
 	}
 }

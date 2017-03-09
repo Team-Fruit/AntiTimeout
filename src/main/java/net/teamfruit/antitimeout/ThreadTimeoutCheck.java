@@ -1,6 +1,10 @@
 package net.teamfruit.antitimeout;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import net.minecraft.server.MinecraftServer;
 
 public class ThreadTimeoutCheck extends Thread {
 
@@ -24,6 +28,18 @@ public class ThreadTimeoutCheck extends Thread {
 			final long timeout = System.currentTimeMillis()-AntiTimeoutHandler.instance().getLastTime();
 			if (timeout>TimeUnit.MINUTES.toMillis(ConfigurationHandler.timeoutMinutes)) {
 				ThreadTimeoutCheck.timeout = true;
+
+				if (ConfigurationHandler.createStampFile) {
+					final File file = MinecraftServer.getServer().getFile(ConfigurationHandler.stampFileName);
+					try {
+						file.createNewFile();
+					} catch (final IOException e) {
+						Reference.logger.error(e);
+					}
+				}
+
+				if (ConfigurationHandler.forceSaveServer)
+					CrashUtil.save();
 				if (ConfigurationHandler.generateCrashReport)
 					CrashUtil.crash("Server timeout", new MinecraftTimeoutError("The server thread has stopped working for at least "+timeout+" milliseconds!"));
 				else
